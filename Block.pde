@@ -1,6 +1,7 @@
 public class Block {
   float x, y;
   int fillColor ; 
+  int HEIGHT = 10 ; 
 
   Block(int colorCode) { 
     fillColor = colorCode ;
@@ -10,10 +11,18 @@ public class Block {
     y+=4;
     fill(fillColor);
 
-    if (y > BOTTOM_OF_SCREEN) {
-      y = FROM_INVISIBLE_COORDINATE;
-      x = random(0, width);
+    if (blockTouchesGround()) {
+      resetPosition();
     }
-    rect(x, y, 10, 10);
+    rect(x, y, 10, HEIGHT);
+  }
+
+  public void resetPosition() { 
+    this.x = random(0, width);
+    this.y = FROM_INVISIBLE_COORDINATE;
+  }
+
+  public boolean blockTouchesGround() { 
+    return (this.y + HEIGHT) >= height ;
   }
 }

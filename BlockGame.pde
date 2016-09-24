@@ -1,5 +1,4 @@
 
-final int BOTTOM_OF_SCREEN = 300 ;
 final int FROM_INVISIBLE_COORDINATE = -10 ;
 final int PINK_COLOR = #F7078C;
 final int BLUE_COLOR = #42CDE8;
@@ -29,25 +28,22 @@ public void draw() {
     // Check if Good block touches paddle
     if (blockTouchesPaddle(b)) { 
       score ++;
-      b.y = FROM_INVISIBLE_COORDINATE;
-      b.x = random(0, width);
-      // e.x = random(0, width); //Creates a glitch
+      b.resetPosition();
+    }
+
+    if (b.blockTouchesGround()) { 
+      score -- ;
     }
 
     // check of evil block touches paddle
     if (blockTouchesPaddle(e)) { 
       score--;
-      e.y = FROM_INVISIBLE_COORDINATE ;
-      e.x = random(0, width);
+      e.resetPosition();
     }
-
     evaluateScore(score);
-
-
     text(score, 10, 15);
   }
 }
-
 
 private void evaluateScore(int score) { 
   if ( score <= -10 || score == 100) { 
@@ -56,7 +52,7 @@ private void evaluateScore(int score) {
 }
 
 void mousePressed() { 
-  gameOver = true ; 
+  gameOver = true ;
 }
 
 private void printGameOverScreen() { 
