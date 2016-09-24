@@ -35,7 +35,7 @@ public void draw() {
       score -- ;
     }
 
-    // check of evil block touches paddle
+    // check if evil block t      b.resetPosition();ouches paddle
     if (blockTouchesPaddle(e)) { 
       score--;
       e.resetPosition();
