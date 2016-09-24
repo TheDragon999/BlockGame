@@ -1,12 +1,11 @@
-
-final int FROM_INVISIBLE_COORDINATE = -10 ;
 final int PINK_COLOR = #F7078C;
 final int BLUE_COLOR = #42CDE8;
 
 Block b, e;
 Paddle p;
 
-int time;
+long SIXTY_SECONDS = 60 * 1000 ;
+long time, lastTime;
 int score = 0;
 boolean gameOver = false ;
 
@@ -20,8 +19,8 @@ public void setup() {
 }
 
 public void draw() {
-  
-   if (gameOver) { 
+
+  if (gameOver) { 
     printGameOverScreen();
   } else {  
     background(0);
@@ -50,26 +49,23 @@ public void draw() {
       e.resetPosition();
     }
 
+    time = millis() - lastTime;
     evaluateScore(score);
     text(score, 10, 15);
   }
 }
 
 private void evaluateScore(int score) { 
-  if ( score <= -5 || score == 15  ) { 
+  if ( score <= -5 || score >= 60 || time >= SIXTY_SECONDS ) { 
     gameOver = true ;
-    time = millis();
   }
 }
 
 void mousePressed() { 
   if (gameOver) {
     restartGame();
-  } 
-  
-  else {
+  } else {
     gameOver = true;
-    time = millis() - time;
   }
 }
 
@@ -77,7 +73,7 @@ private void printGameOverScreen() {
   background(0);
   text("Game is Over", 20, 20);
   text("Final Score is " + score, 20, 40);
-  text("Time taken is : " + time/1000 + " seconds ",20,60);
+  text("Time taken is : " + time/1000 + " seconds ", 20, 60);
 }
 
 private boolean blockTouchesPaddle(Block givenBlock) { 
@@ -91,5 +87,5 @@ private boolean blockTouchesPaddle(Block givenBlock) {
 public void restartGame() {
   gameOver = false;
   score = 0;
-  time = millis();
+  lastTime = millis();
 }

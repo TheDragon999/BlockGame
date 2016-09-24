@@ -17,7 +17,7 @@ public class Block {
 
   public void resetPosition() { 
     this.x = random(0, width);
-    this.y = - random(70);
+    this.y = - random(100);
   }
 
   public boolean blockTouchesGround() { 
