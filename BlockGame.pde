@@ -3,21 +3,25 @@ final int FROM_INVISIBLE_COORDINATE = -10 ;
 final int PINK_COLOR = #F7078C;
 final int BLUE_COLOR = #42CDE8;
 
-Block b = new Block(PINK_COLOR);
-Paddle p = new Paddle();
-Block e = new Block(BLUE_COLOR);
+Block b, e;
+Paddle p;
 
+int time;
 int score = 0;
 boolean gameOver = false ;
 
 public void setup() {
-  size(200, 200);
-  b.x = random(0, width);
+  size(500, 500);
   noCursor();
+
+  b = new Block(PINK_COLOR);
+  p = new Paddle();
+  e = new Block(BLUE_COLOR);
 }
 
 public void draw() {
-  if (gameOver) { 
+  
+   if (gameOver) { 
     printGameOverScreen();
   } else {  
     background(0);
@@ -41,36 +45,51 @@ public void draw() {
       score--;
       e.resetPosition();
     }
-    
+
     if (e.blockTouchesGround()) { 
       e.resetPosition();
     }
-    
+
     evaluateScore(score);
     text(score, 10, 15);
   }
 }
 
 private void evaluateScore(int score) { 
-  if ( score <= -5 || score == 15) { 
+  if ( score <= -5 || score == 15  ) { 
     gameOver = true ;
+    time = millis();
   }
 }
 
 void mousePressed() { 
-  gameOver = true ;
+  if (gameOver) {
+    restartGame();
+  } 
+  
+  else {
+    gameOver = true;
+    time = millis() - time;
+  }
 }
 
 private void printGameOverScreen() { 
   background(0);
   text("Game is Over", 20, 20);
-  text("Final Score is " + score, 30, 30);
+  text("Final Score is " + score, 20, 40);
+  text("Time taken is : " + time/1000 + " seconds ",20,60);
 }
 
 private boolean blockTouchesPaddle(Block givenBlock) { 
   return (  
-    givenBlock.y < (p.y + Paddle.HEIGHT_OF_PADDLE) 
+    givenBlock.y < (p.y + p.HEIGHT_OF_PADDLE) 
     && givenBlock.x > mouseX 
     && givenBlock.y > p.y 
-    && givenBlock.x < mouseX + Paddle.SIZE_OF_PADDLE);
+    && givenBlock.x < mouseX + p.SIZE_OF_PADDLE);
+}
+
+public void restartGame() {
+  gameOver = false;
+  score = 0;
+  time = millis();
 }

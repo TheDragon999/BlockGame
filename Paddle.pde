@@ -1,11 +1,12 @@
 public class Paddle {
-  int y = height + 80;
+  int y = 0;
   int x = mouseX;
-  static final int SIZE_OF_PADDLE = 40 ;
-  static final int HEIGHT_OF_PADDLE = 10 ;
+  int SIZE_OF_PADDLE = width/5 ;
+  int HEIGHT_OF_PADDLE = height/20 ;
 
   public void draw() {
     x = mouseX;
+    y = height - HEIGHT_OF_PADDLE;
     fill(225);
     if (this.x < 0) {
       this.x = 0;
