@@ -51,7 +51,8 @@ public void draw() {
 
     time = millis() - lastTime;
     evaluateScore(score);
-    text(score, 10, 15);
+    text("Score ... " + score, 10, 15);
+    text("Time lapsed ... " + time / 1000, width - 130, 15);
   }
 }
 
@@ -66,6 +67,13 @@ void mousePressed() {
     restartGame();
   } else {
     gameOver = true;
+  }
+}
+
+void keyPressed() { 
+  if ( key == 'q') { 
+    score = 50;
+    gameOver = true ;
   }
 }
 
