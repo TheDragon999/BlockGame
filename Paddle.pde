@@ -1,7 +1,7 @@
 public class Paddle {
   int y = height + 80;
   int x = mouseX;
-  int SIZE_OF_PADDLE = 40 ;
+  static final int SIZE_OF_PADDLE = 40 ;
 
   public void draw() {
     x = mouseX;
