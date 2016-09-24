@@ -33,20 +33,26 @@ public void draw() {
 
     if (b.blockTouchesGround()) { 
       score -- ;
+      b.resetPosition();
     }
 
-    // check if evil block t      b.resetPosition();ouches paddle
+    // check if evil block touches paddle
     if (blockTouchesPaddle(e)) { 
       score--;
       e.resetPosition();
     }
+    
+    if (e.blockTouchesGround()) { 
+      e.resetPosition();
+    }
+    
     evaluateScore(score);
     text(score, 10, 15);
   }
 }
 
 private void evaluateScore(int score) { 
-  if ( score <= -10 || score == 100) { 
+  if ( score <= -5 || score == 15) { 
     gameOver = true ;
   }
 }

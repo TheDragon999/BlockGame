@@ -10,12 +10,8 @@ public class Block {
   public void draw() {
     y+=4;
     fill(fillColor);
-
-    if (blockTouchesGround()) {
-      resetPosition();
-    }
-    rect(x, y, 10, HEIGHT);
-  }
+    rect(x, y, 10, HEIGHT);}
+  
 
   public void resetPosition() { 
     this.x = random(0, width);
@@ -24,5 +20,6 @@ public class Block {
 
   public boolean blockTouchesGround() { 
     return (this.y + HEIGHT) >= height ;
-  }
+ 
+}
 }
